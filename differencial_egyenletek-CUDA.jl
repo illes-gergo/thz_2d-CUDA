@@ -144,10 +144,10 @@ function thz_feedback_n2_SHG(t, Y::compositeInputGPU, misc::miscInputsGPU)
   ASH = Y.ASH
   dAop_lin = imp_terjedes(t, Aop, misc.PFC, misc.RTC)
   dTHz_gen = -1im .* misc.RTC.comegaTHz .^ 2 ./ 2 ./ misc.TFC.kz_omegaTHz ./ misc.NC.e0 ./ misc.NC.c0 .^ 2 .* thz_generation(t, Aop, misc) .* exp.(1im .* misc.TFC.kz_omegaTHz .* t) - misc.TFC.alpha / 2 .* ATHz
-  if sum(isnan.(dTHz_gen)) > 0
-    #      println("$(sum(isnan.(temp_val))) NaN value not handled")
-    dTHz_gen[isnan.(dTHz_gen)] = zeros(size(dTHz_gen[isnan.(dTHz_gen)]))
-  end
+  # if sum(isnan.(dTHz_gen)) > 0
+  #      println("$(sum(isnan.(temp_val))) NaN value not handled")
+  dTHz_gen[isnan.(dTHz_gen)] = zeros(size(dTHz_gen[isnan.(dTHz_gen)]))
+  #end
 
   dAopCsc = thz_cascade(t, Aop, ATHz, misc) #=zeros(size(Aop))=#
   dAopn2 = n2calc(t, Aop, misc) #=zeros(size(Aop))=#

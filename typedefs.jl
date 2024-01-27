@@ -49,6 +49,7 @@ struct compositeInput
   function compositeInput(inp::compositeInputGPU)
     if sum(isnan.(inp.Akxo)) > 0
       println("NaN values not handled at fetch!")
+      error()
     end
     new(Array(inp.Akxo), Array(inp.ATHz_kx_o), Array(inp.ASH))
   end
